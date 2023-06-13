@@ -1,0 +1,24 @@
+std::string encodeStrings(const std::vector<std::string>& strings) {
+    std::string encodedString;
+
+    for (const std::string& str : strings) {
+        encodedString += std::to_string(str.length()) + "#" + str;
+    }
+
+    return encodedString;
+}
+
+std::vector<std::string> decodeString(const std::string& encodedString) {
+    std::vector<std::string> decodedStrings;
+
+    size_t index = 0;
+    while (index < encodedString.length()) {
+        size_t delimiterPos = encodedString.find("#", index);
+        size_t length = std::stoi(encodedString.substr(index, delimiterPos - index));
+        index = delimiterPos + 1;
+        decodedStrings.push_back(encodedString.substr(index, length));
+        index += length;
+    }
+
+    return decodedStrings;
+}
