@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+        if(nums.empty()){return 0;}
+        set<int> numSet(nums.begin(), nums.end());
+        int count = 1;
+
+        auto prevIt = numSet.begin();
+        auto currIt = next(prevIt);
+
+        while (currIt != numSet.end()) {
+            if (*currIt - *prevIt == 1) {
+                count += 1;
+            }
+            prevIt = currIt;
+            currIt = next(currIt);
+        }  
+        return count;
+
+        }
+};
