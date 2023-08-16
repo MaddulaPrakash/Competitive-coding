@@ -1,0 +1,22 @@
+class Solution {
+public:
+    bool isValid(string s) {
+            stack<char> parStk;
+            unordered_map<char, char> parMap {{')', '('}, {'}', '{'}, {']', '['}};
+
+            for (char c : s){
+                if (c == '(' || c == '{' || c == '['){
+                    parStk.push(c);
+                    cout<<parStk.size();
+                }
+                else if (c =='}' || c == ')' || c == ']'){
+                    if (parStk.empty() || parStk.top() != parMap[c])
+                        return false;
+                    
+                    parStk.pop();
+                }
+            }
+
+            return true;    
+        }
+};
