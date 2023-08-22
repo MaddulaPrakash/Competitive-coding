@@ -1,0 +1,25 @@
+class Solution {
+public:
+    vector<string> generateParenthesis(int n) {
+        vector<string> result;
+        backTrack(n, 0, 0, "", result);
+        return result;
+    }
+
+private:
+    void backTrack(int n, int left, int right, string str, vector<string>& result)
+    {
+        if (str.length() == n*2)
+        {
+            result.push_back(str);
+            return;
+        }
+
+        if (left < n)
+            backTrack(n, left + 1, right, str + '(', result);
+
+        if(right < left)
+            backTrack(n, left, right + 1, str + ')', result);
+
+    }
+};
