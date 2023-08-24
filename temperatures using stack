@@ -1,0 +1,19 @@
+class Solution {
+public:
+    vector<int> dailyTemperatures(vector<int>& temperatures) {
+        int n = temperatures.size();
+        vector<int> result(n, 0);
+        stack<int> tempIndices;
+
+        for (int i = 0; i < n; i++){
+            while(!tempIndices.empty() && temperatures[i] > temperatures[tempIndices.top()]){
+                int prev = tempIndices.top();
+                tempIndices.pop();
+                result[prev] = i - prev;
+            }
+            tempIndices.push(i);
+        }
+    
+        return result;
+    }
+};
